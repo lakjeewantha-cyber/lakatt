@@ -4,12 +4,12 @@
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PDF Time Logger</title>
+<title>Offline PDF Logger</title>
 
 <script>
+// Service Worker register (must be here)
 if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("sw.js")
-    .then(() => console.log("SW Registered"));
+    navigator.serviceWorker.register("sw.js");
 }
 </script>
 
@@ -54,56 +54,39 @@ body{
 
 <body>
 
-<!-- CLOSE BUTTON -->
-<button class="closeBtn" onclick="closeApp()">
-    CLOSE
-</button>
+<button class="closeBtn" onclick="closeApp()">CLOSE</button>
 
-<!-- SAVE BUTTON -->
-<button class="saveBtn" onclick="savePDF()">
-    SAVE PDF
-</button>
+<button class="saveBtn" onclick="savePDF()">SAVE PDF</button>
 
-<!-- jsPDF -->
+<!-- LOCAL FILE ONLY (NO CDN) -->
 <script src="jspdf.umd.min.js"></script>
 
 <script>
 
-// PDF save function
-async function savePDF(){
+function savePDF(){
 
     let now = new Date();
 
-    // Date parts
-    let dd = String(now.getDate()).padStart(2, '0');
-    let mm = String(now.getMonth() + 1).padStart(2, '0');
+    let dd = String(now.getDate()).padStart(2,'0');
+    let mm = String(now.getMonth()+1).padStart(2,'0');
     let yy = String(now.getFullYear()).slice(-2);
 
-    // Time parts
-    let hh = String(now.getHours()).padStart(2, '0');
-    let min = String(now.getMinutes()).padStart(2, '0');
+    let hh = String(now.getHours()).padStart(2,'0');
+    let min = String(now.getMinutes()).padStart(2,'0');
 
-    // File name format
     let fileName = `${dd}${mm}${yy}_${hh}${min}.pdf`;
-
-    // PDF text
-    let text = now.toLocaleString();
 
     const { jsPDF } = window.jspdf;
 
     let doc = new jsPDF();
 
     doc.setFontSize(20);
+    doc.text(now.toLocaleString(), 20, 40);
 
-    doc.text(text, 20, 40);
-
-    // Save PDF
     doc.save(fileName);
 }
 
-// Close screen
 function closeApp(){
-
     document.body.innerHTML =
     "<h1 style='text-align:center;margin-top:50%;font-size:40px;'>App Closed</h1>";
 }
