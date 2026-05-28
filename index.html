@@ -2,7 +2,8 @@
 <html>
 <script>
 if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("sw.js");
+    navigator.serviceWorker.register("sw.js")
+    .then(() => console.log("SW Registered"));
 }
 </script>
 
@@ -11,6 +12,10 @@ if ("serviceWorker" in navigator) {
 <title>PDF Time Logger</title>
 
 <style>
+
+
+
+
 
 body{
     margin:0;
