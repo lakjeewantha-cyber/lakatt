@@ -1,8 +1,4 @@
-const CACHE_NAME = "time-logger-v3";
-const urlsToCache = [
-  "index.html",
-  "manifest.json"
-];
+const CACHE_NAME = "time-logger-v4";
 
 const urlsToCache = [
   "index.html",
@@ -10,7 +6,6 @@ const urlsToCache = [
   "sw.js",
   "jspdf.umd.min.js"
 ];
-
 
 self.addEventListener("install", event => {
   event.waitUntil(

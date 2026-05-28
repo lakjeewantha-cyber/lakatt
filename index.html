@@ -55,29 +55,40 @@ body{
 </button>
 
 <!-- jsPDF -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="jspdf.umd.min.js"></script>
 <script>
 
 // PDF save function
 async function savePDF(){
 
-    let now = new Date().toLocaleString();
+    let now = new Date();
+
+    // Date parts
+    let dd = String(now.getDate()).padStart(2, '0');
+    let mm = String(now.getMonth() + 1).padStart(2, '0');
+    let yy = String(now.getFullYear()).slice(-2);
+
+    // Time parts
+    let hh = String(now.getHours()).padStart(2, '0');
+    let min = String(now.getMinutes()).padStart(2, '0');
+
+    // File name format
+    let fileName = `${dd}${mm}${yy}_${hh}${min}.pdf`;
+
+    // PDF text
+    let text = now.toLocaleString();
 
     const { jsPDF } = window.jspdf;
 
     let doc = new jsPDF();
 
-    // Font size 20
     doc.setFontSize(20);
 
-    // Write date & time
-    doc.text(now, 20, 40);
+    doc.text(text, 20, 40);
 
     // Save PDF
-    doc.save("timelog.pdf");
+    doc.save(fileName);
 }
-
 // Close screen
 function closeApp(){
 
