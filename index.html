@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF Time Logger</title>
+
 <script>
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("sw.js")
@@ -7,15 +13,7 @@ if ("serviceWorker" in navigator) {
 }
 </script>
 
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PDF Time Logger</title>
-
 <style>
-
-
-
-
 
 body{
     margin:0;
@@ -51,6 +49,7 @@ body{
 }
 
 </style>
+
 </head>
 
 <body>
@@ -67,6 +66,7 @@ body{
 
 <!-- jsPDF -->
 <script src="jspdf.umd.min.js"></script>
+
 <script>
 
 // PDF save function
@@ -100,6 +100,7 @@ async function savePDF(){
     // Save PDF
     doc.save(fileName);
 }
+
 // Close screen
 function closeApp(){
 
